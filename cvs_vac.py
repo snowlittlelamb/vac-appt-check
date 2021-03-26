@@ -59,11 +59,11 @@ def check_and_send():
     avail, _ = check_state(state)
     avail_loc = avail.loc[avail[avail.columns[0]].isin(towns), avail.columns[0]] if towns is not None else avail[avail.columns[0]]
 
-    if len(avail.index) > 0:
+    if len(avail_loc.index) > 0:
 
         print(f"Available Appointment found in {state}; sending emails!")
         # Message in the email.
-        cities ="\n".join(avail_loc.index)
+        cities ="\n".join(avail_loc.values)
         message = f"Subject:CVS Vaccine Availability\n\nAvailable Cities in {state}:\n{cities}"
 
         # Create a secure SSL context
